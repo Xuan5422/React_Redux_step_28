@@ -47,7 +47,7 @@ const HeroesListItem = ({id, name, description, element}) => {
                  style={{'objectFit': 'cover'}}/>
             <div className="card-body">
                 
-                <h3 className="card-title">{name}</h3>
+                <h3 className="card-title">{name+' '+id}</h3>
                 <p className="card-text">{description}</p>
             </div>
             <span className="position-absolute top-0 start-100 translate-middle badge border rounded-pill bg-light">

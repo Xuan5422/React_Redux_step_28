@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
                 heroesLoadingStatus: 'error'
             }
         case 'HEROES_DELETE':
-
+            console.log('reduser - улаляем героя: ', action.payload);
             return {
                 ...state,
             //    heroes: state.heroes.filter(item => item.id !== action.payload), 
