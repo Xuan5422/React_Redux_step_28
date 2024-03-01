@@ -33,13 +33,13 @@ const HeroesList = () => {
     } else if (heroesLoadingStatus === "error") {
         return <h5 className="text-center mt-5">Ошибка загрузки</h5>
     }
-    if (heroesLoadingStatus === "delete") {
+    /* if (heroesLoadingStatus === "delete") {
 
         dispatch(heroesFetching());
         request("http://localhost:3001/heroes")
             .then(data => dispatch(heroesFetched(data)))
             .catch(err => console.log(err))
-    }
+    } */
 
     const renderHeroesList = (arr) => {
         if (arr.length === 0) {
