@@ -29,11 +29,10 @@ const HeroesListItem = ({id, name, description, element}) => {
     const dispatch = useDispatch();
     const {request} = useHttp();
 
-    const onHeroesDelete = (e) => {
+    const onHeroesDelete = () => {
         dispatch(heroesFetching());
-        console.log('e.currentTarget.id: ', e.currentTarget.id);
-        request(`http://localhost:3001/heroes/${e.currentTarget.id}`, "DELETE")
-        .then( dispatch(heroesDelete(e.currentTarget.id)))
+        request(`http://localhost:3001/heroes/${id}`, "DELETE")
+        .then( dispatch(heroesDelete(id)))
         .catch(err => console.log(err))      
     }
 
@@ -51,7 +50,7 @@ const HeroesListItem = ({id, name, description, element}) => {
                 <p className="card-text">{description}</p>
             </div>
             <span className="position-absolute top-0 start-100 translate-middle badge border rounded-pill bg-light">
-                <button tabIndex="0" id={id} type="button" className="btn-close btn-close" aria-label="Close" onFocus={onHeroesDelete}></button>
+                <button tabIndex="0" type="button" className="btn-close btn-close" aria-label="Close" onFocus={onHeroesDelete}></button>
             </span>
         </li>
     )

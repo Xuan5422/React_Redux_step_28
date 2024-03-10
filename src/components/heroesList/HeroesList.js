@@ -33,13 +33,11 @@ const HeroesList = () => {
     } else if (heroesLoadingStatus === "error") {
         return <h5 className="text-center mt-5">Ошибка загрузки</h5>
     }
-    /* if (heroesLoadingStatus === "delete") {
+     console.log('heroesLoadingStatus: ', heroesLoadingStatus);
 
-        dispatch(heroesFetching());
-        request("http://localhost:3001/heroes")
-            .then(data => dispatch(heroesFetched(data)))
-            .catch(err => console.log(err))
-    } */
+    if (heroesLoadingStatus === "add") {
+        console.log(JSON.stringify(heroes, null, 2))
+    } 
 
     const renderHeroesList = (arr) => {
         if (arr.length === 0) {
@@ -50,7 +48,6 @@ const HeroesList = () => {
             return <HeroesListItem key={item.id} {...item} />
         })
     }
-    console.log('HeroesList - heroes', heroes);
 
     const elements = renderHeroesList(heroes);
     return (
