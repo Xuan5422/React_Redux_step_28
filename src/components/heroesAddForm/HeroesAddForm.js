@@ -1,4 +1,4 @@
-import { useState } from "react";
+//import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { v4 as uuidv4 } from 'uuid'
@@ -16,19 +16,7 @@ import { useDispatch } from 'react-redux';
 // данных из фильтров
 
 const HeroesAddForm = () => {
-    /* const [hero, setHero] = useState({
-        id: '',
-        name: '',
-        description: '',
-        element: ''
-    }); */
 
- let hero = {
-        id: '',
-        name: '',
-        description: '',
-        element: ''
-    }
     const dispatch = useDispatch();
 
     return (
@@ -37,29 +25,33 @@ const HeroesAddForm = () => {
             description: '',
             element: ''
         }}
-        validationSchema={Yup.object({
-            name: Yup.string()
-                .min(3, 'Минимум 3 символа!')
-                .required('Обязательное поле!'),
-            description: Yup.string()
-                .min(10, 'Минимум 10 символов!')
-                .required('Обязательное поле!'),
-            element: Yup.string()
-                .required('Выбитите элемент стихии!')
-        })}
-        onSubmit={values => {
-            
-            hero.id = uuidv4();
-            hero = {...hero, ...values};
-            dispatch(heroesAdd(hero));
-     //       console.log(JSON.stringify(hero, null, 2))
-        }}
+            validationSchema={Yup.object({
+                name: Yup.string()
+                    .min(3, 'Минимум 3 символа!')
+                    .required('Обязательное поле!'),
+                description: Yup.string()
+                    .min(10, 'Минимум 10 символов!')
+                    .required('Обязательное поле!'),
+                element: Yup.string()
+                    .required('Выбитите элемент стихии!')
+            })}
+            onSubmit={(values, {resetForm}) => {
+
+                const hero = {
+                    id: uuidv4(),
+                    name: values.name,
+                    description: values.description,
+                    element: values.element,
+                }
+                dispatch(heroesAdd(hero));                
+                resetForm({values: ''})
+            }}
         >
-            
+
             <Form className="border p-4 shadow-lg rounded">
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label fs-4">Имя нового героя</label>
-                    <Field 
+                    <Field
                         className="form-control"
                         id="name"
                         name="name"
@@ -67,7 +59,7 @@ const HeroesAddForm = () => {
                         placeholder="Как меня зовут?"
                     />
                 </div>
-                <ErrorMessage className="error" name="name" component="div"/>
+                <ErrorMessage className="error" name="name" component="div" />
                 <div className="mb-3">
                     <label htmlFor="text" className="form-label fs-4">Описание</label>
                     <Field
@@ -79,7 +71,7 @@ const HeroesAddForm = () => {
                         style={{ "height": '130px' }}
                     />
                 </div>
-                <ErrorMessage className="error" name="text" component="div"/>
+                <ErrorMessage className="error" name="text" component="div" />
 
                 <div className="mb-3">
                     <label htmlFor="element" className="form-label">Выбрать элемент героя</label>
@@ -95,7 +87,7 @@ const HeroesAddForm = () => {
                         <option value="earth">Земля</option>
                     </Field>
                 </div>
-                <ErrorMessage className="error" name="element" component="div"/>
+                <ErrorMessage className="error" name="element" component="div" />
                 <button type="submit" className="btn btn-primary">Создать</button>
             </Form>
         </Formik>
